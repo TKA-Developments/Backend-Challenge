@@ -5,9 +5,15 @@ At TKA, we're less interested in your formal qualifications than in your ability
 
 ## Instructions
 ### 1. Learn
+- Feel free to learn from any resources. here are a few resources that can help you to get started:
+    - [What is REST API?](https://youtu.be/-mN3VyJuCjM)
+    - [Build a Rest Api with NodeJS (JavaScript), Express, and PostgreSQL](https://youtu.be/DihOP19LQdg)
+- We have a Udemy account that you can borrow (reach out to ...). We have access to an online course that teaches you the fundamentals of web development, feel free to reach out if you are interested!
+- Get familiar with GitHub by going through the [GitHub tutorial](https://guides.github.com/activities/hello-world/).
+
 ### 2. Build
 - You have 1 week to complete the challenge. We can see the commits timeline
-- Implementation (code) and design (UI/UX) will be evaluated
+- Implementation (code) will be evaluated according to the requirements
 
 ### 3. Show
 - Impress us with your skills
