@@ -8,7 +8,7 @@ At TKA, we're less interested in your formal qualifications than in your ability
 - Feel free to learn from any resources. here are a few resources that can help you to get started:
     - [What is REST API?](https://youtu.be/-mN3VyJuCjM)
     - [Build a Rest Api with NodeJS (JavaScript), Express, and PostgreSQL](https://youtu.be/DihOP19LQdg)
-- We have a Udemy account that you can borrow (reach out to ...). We have access to an online course that teaches you the fundamentals of web development, feel free to reach out if you are interested!
+- We have a Udemy account that you can borrow (reach out to [admin@tka.co.id](mailto:admin@tka.co.id)). We have access to an online course that teaches you the fundamentals of web development, feel free to reach out if you are interested!
 - Get familiar with GitHub by going through the [GitHub tutorial](https://guides.github.com/activities/hello-world/).
 
 ### 2. Build
@@ -30,4 +30,35 @@ At TKA, we're less interested in your formal qualifications than in your ability
 - Commit your changes
 - Fork the challenge repository
 - Issue a Pull Request
-- Notify us. Please send an email to ...
+- Notify us. Please send an email to [admin@tka.co.id](mailto:admin@tka.co.id)
+
+### Suggestions
+- Make it easy for us to try your app. Add instructions on how to run your demo. There's a section below you can fill in
+- Don't be afraid if you're still a newbie. We will judge what you built adjusted with your experience. If you're just starting out, but can learn fast. We want you :)
+- Make something fun. We love to party too! :D
+- Be prepared to explain your decisions and your thought process in the next interview. We're curious about how you think! :)
+
+## The Goal
+Your local library needs help! they want to keep up with the digital age and move their book inventory online for people to access.
+
+Create a library book collection back-end (database + API connections) system for your local library to manage their inventory. Using Node, Ecpress, and PostgreSQL, create end-points with the following specifications:
+
+Endpoint | Actions | Description
+---------|---------|-------------------------------------------------
+users    | GET     | respond with a list of users
+---------|---------|-------------------------------------------------
+         | POST    | respond with details of a newly created user
+---------|---------|-------------------------------------------------
+users/:id| GET
+---------|---------|-------------------------------------------------
+         | PUT     |
+---------|---------|-------------------------------------------------
+         | DELETE  |
+---------|---------|-------------------------------------------------
+books
+books/:id
+## Requirements
+
+## Bonus
+## How to run the demo
+(REPLACE THIS WITH YOUR INSTRUCTIONS)
