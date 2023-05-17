@@ -43,20 +43,23 @@ Your local library needs help! they want to keep up with the digital age and mov
 
 Create a library book collection back-end (database + API connections) system for your local library to manage their inventory. Using Node, Ecpress, and PostgreSQL, create end-points with the following specifications:
 
-Endpoint | Actions | Description
----------|---------|-------------------------------------------------
-users    | GET     | respond with a list of users
----------|---------|-------------------------------------------------
-         | POST    | respond with details of a newly created user
----------|---------|-------------------------------------------------
-users/:id| GET
----------|---------|-------------------------------------------------
-         | PUT     |
----------|---------|-------------------------------------------------
-         | DELETE  |
----------|---------|-------------------------------------------------
-books
-books/:id
+|Endpoint | Actions | Description |
+|---------|---------|-------------|
+|users      | GET    | Respond with a list of users |
+|           | POST   | Respond with data of the newly created user |
+| user/:id  | GET    | Respond with data of the specified user or return 404 error |
+|           | PUT    | Replace the user indicated by the id with supplied data or return 404 error |
+|           | DELETE | Delete the user indicated by the id or return 404 error |
+| books     | GET    | Respond with a list of books in the collection
+|           | POST   | Respond with data of the newly created book |
+| books/:id | GET    | Respond with data of the specified book or return 404 error |
+|           | PUT    | Replace entire book with supplied data or return 404 error |
+|           | DELETE | Delete the book indicated by the id or 404 error |
+
+**IMPORTANT**: Furthermore, the GET requests to the `users` and `books` endpoints require the utilization of specific JSON encoded query string parameters. It is also essential to ensure that the select parameter functions properly for the `users/:id` and `books/:id` endpoints.:
+
+| Parameter | Description |
+
 ## Requirements
 
 ## Bonus
