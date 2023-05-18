@@ -47,9 +47,6 @@ Create a library book collection back-end (database + API connections) system fo
 | `cond`    | filter return values based on JSON query |
 | `sort`    | specify the order that a specified field is sorted by (1 = ascending, 0 = descending) |
 | `select`  | specify the set of fields to include or exclude in each results ( 1 = include, 0 = exclude) |
-| `skip`    | specify the number of return values to skip in the result set, good for pagination |
-| `amount`  | specify the number of results to return (default for books is 50 and unlimited for users) |
-| `count`   | if set to true, return the count of documents that match the query (NOT the actual user/book data) |
 
 Below are some examples and their return values:
 
@@ -75,8 +72,6 @@ The following is the user schema:
 |-----------|-----------|----------------------------------------------|
 | `name` | String | required field |
 | `email`| String | required field |
-| `favorites` | [String] | **BONUS** ids of books the user favorited. default [].**does not need to be implemented if you choose not to** |
-| `currentlyBorrowing` | String | **BONUS** id of the book being borrowed. this needs to make sense, e.g. user can't be currently borrowing a book that no longer exist in the collection. default "".**does not need to be implemented if you choose not to**|
 | `dateCreated` | Date |  should be set automatically by the server |
 
 The following is the books schema:
@@ -87,19 +82,66 @@ The following is the books schema:
 | `author` | String | required field |
 | `publicationDate` | Date | default current date |
 | `publisher` | String | default "" |
-| `available` | Boolean | **BONUS** indicate whether or not the book is available. default `true`. **does not need to be implemented if you choose not to**|
-| `borrowedBy` | String | **BONUS** id of the user borrowing the book. default "". **does not need to be implemented if you choose not to**|
 
 **We assume that there's only one copy of each book in the collection.**
 
-**for those doing the BONUS, we have to ensure that the each book can only be borrowed by one user at a time. Otherwise, don't worry about it.**
-
 ## Requirements
+1. Use PostgreSQL for your database, it should contain atleast 5 users and 25 books. **We have provided scripts for you to populate and clear the database, read below on how to use it**.
+2. Responses of your API should be a JSON object with 2 fields. the fist one is `message` and should contain a String readable to humans. The second field should be named `results` and should contain the actual JSON response object. Below is an example of a response:
+
+```json
+{
+    "message": "OK",
+    "results": {
+        "_id": "w039e02",
+        "title": "Sense and Sensibility",
+        "author": "Jane Austen",
+    }
+}
+```
+3. When encountering errors, the responses from your API should consist of a JSON object containing `message` and `results` fields. The messages should be meaningful and easily understood by humans, allowing them to be displayed to users on the client side. Additionally, it is crucial for these error messages to be independent of the server-side technology being utilized. For instance, your API should avoid directly returning error messages from PostgreSQL to the client.
+4. Your API should respond with the appropriate HTTP status code. You should atleast have 200 (OK), 201 (created), 404 (not found), 500 (server error).
+5. To incorporate query string functionality, it is recommended to utilize the methods offered by PostgreSQL **instead of** fetching all the results from PostgreSQL and then performing filtering, sorting, skipping, etc. within your Node/Express application code.
+6. Have server side validation for:
+    - Users have to have atleast a name and email, other fields not specified can be set to reasonable values.
+    - Multiple users with the same email can't exist
+    - Books have to have atleast a title and an author, other fields not specified can be set to reasonable values.
 
 ## Bonus
+- Implement more queries below:
 
-## How to run the demo
-(REPLACE THIS WITH YOUR INSTRUCTIONS)
+| Query                                       | Description |
+|---------------------------------------------|---------|
+| `skip`    | specify the number of return values to skip in the result set, good for pagination |
+| `amount`  | specify the number of results to return (default for books is 50 and unlimited for users) |
+| `count`   | if set to true, return the count of documents that match the query (NOT the actual user/book data) |
+
+- Allow users to add a book to their favorites, remember that books that no longer exist have to be removed from users' favorites. **To do this, you must add the following field to the user schema**:
+
+| Field     | Data Type | Note |
+|-----------|-----------|----------------------------------------------|
+| `favorites` | [String] | ids of books the user favorited. default [].|
+
+- Allow user to see whether or not the book is available for them to borrow. This needs to make sense, e.g. user can't be currently borrowing a book that no longer exist in the collection. Make sure that the book can only be borrowed by one user at a time. **To do this, you must add the following field to the user schema**:
+
+| Field     | Data Type | Note |
+|-----------|-----------|----------------------------------------------|
+| `currentlyBorrowing` | String | id of the book being borrowed. default "".|
+
+**You must also add these fields to the books schema**:
+
+| Field     | Data Type | Note |
+|-----------|-----------|----------------------------------------------|
+| `available` | Boolean | indicate whether or not the book is available. default `true`.|
+| `borrowedBy` | String | id of the user borrowing the book. default "".|
+
+- The following methods in your API should ensure a two-way reference between `users` and `books`:
+    - PUT a book with `borrowedBy` and `available`
+    - PUT a user with `currentlyBorrowing`
+    - DELETE a book will remove the book from user's `favorites` and `currentlyBorrowing`
+    - DELETE a user should remove the user from the books' `borrowedBy`
+- Come up with something fun!
+
 
 ## Getting Started
 - Setup your dev environment by following the [Node JS installation guide](https://nodejs.org/en/download) and [PostgreSQL documentation](https://www.postgresql.org/docs/current/tutorial-install.html)
@@ -114,9 +156,12 @@ The following is the books schema:
 - Notify us. Please send an email to [admin@tka.co.id](mailto:admin@tka.co.id)
 
 ## Suggestions
-- Make it easy for us to try your app. Add instructions on how to run your demo. There's a section below you can fill in
+- Make it easy for us to try your app. Add instructions on how to run your demo. There's a section below where you can fill in.
 - Checkout [Postman](https://www.postman.com) to test your API
 - Free [PostgreSQL server](https://www.postgresql.org)
 - No need to host your server anywhere, the code will be reviewed locally, make sure that your PostgreSQL server is running all the time during the testing & review period
 - Don't be afraid if you're still a newbie. We will judge what you built adjusted with your experience. If you're just starting out, but can learn fast. We want you :)
 - Be prepared to explain your decisions and your thought process in the next interview. We're curious about how you think! :)
+
+## How to run the demo
+(REPLACE THIS WITH YOUR INSTRUCTIONS)
