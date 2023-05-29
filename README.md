@@ -106,6 +106,7 @@ The following is the books schema:
     - Users have to have atleast a name and email, other fields not specified can be set to reasonable values.
     - Multiple users with the same email can't exist
     - Books have to have atleast a title and an author, other fields not specified can be set to reasonable values.
+7. Use these requirements and examples to create your own tests, **this is a very important step and we will be evaluating your tests.**
 
 ## Bonus
 - Implement more queries below:
@@ -140,6 +141,7 @@ The following is the books schema:
     - PUT a user with `currentlyBorrowing`
     - DELETE a book will remove the book from user's `favorites` and `currentlyBorrowing`
     - DELETE a user should remove the user from the books' `borrowedBy`
+- Create additional tests for each point of the bonus points that you decided to implement. **Again, this is a very important step to let us know how thorough you are.**
 - Come up with something fun!
 
 
@@ -148,7 +150,7 @@ The following is the books schema:
 - Clone the challenge repository
 - Create a dedicated branch
 - install the dependencies by running `npm install`
-- Start the dev server by running `npm start` or `nodemon --exec node server.js` to automatically restart the server on save.
+- Start the dev server by running `npm start`.
 - Write your code
 - Commit your changes
 - Fork the challenge repository
