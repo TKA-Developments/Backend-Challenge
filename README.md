@@ -117,30 +117,47 @@ The following is the books schema:
 | `amount`  | specify the number of results to return (default for books is 50 and unlimited for users) |
 | `count`   | if set to true, return the count of documents that match the query (NOT the actual user/book data) |
 
-- Allow users to add a book to their favorites, remember that books that no longer exist have to be removed from users' favorites. **To do this, you must add the following field to the user schema**:
+- Allow users to add a book to their favorites, remember that books that no longer exist have to be removed from users' favorites. **To do this, you must add another table in the database called `user_favorites` with the following schema**:
 
 | Field     | Data Type | Note |
 |-----------|-----------|----------------------------------------------|
-| `favorites` | [String] | ids of books the user favorited. default [].|
+| `user_id` | String | id of the user.|
+| `book_id` | String | id of the book favorited by the user specified in the `user_id` field.|
 
-- Allow user to see whether or not the book is available for them to borrow. This needs to make sense, e.g. user can't be currently borrowing a book that no longer exist in the collection. Make sure that the book can only be borrowed by one user at a time. **To do this, you must add the following field to the user schema**:
+**Don't forget to add the following API**
+
+|Endpoint | Actions | Description |
+|---------|---------|-------------|
+| `user_favorites`  | POST    | Respond with data of the newly created user favorite. |
+| `user_favorites:id`  | PUT    | Replace the data of the specified user favorite or return 404 error |
+| | GET    | Respond with data of the specified user favorite or return 404 error |
+| | DELETE    | remove the data of the specified user favorite or return 404 error |
+
+- Allow user to see whether or not the book is available for them to borrow. This needs to make sense, e.g. user can't be currently borrowing a book that no longer exist in the collection. Make sure that the book can only be borrowed by one user at a time. **To do this, you must add another table in the database called `borrowed_books` with the following schema**:
 
 | Field     | Data Type | Note |
 |-----------|-----------|----------------------------------------------|
-| `currentlyBorrowing` | String | id of the book being borrowed. default "".|
+| `user_id` | String | id of the user.|
+| `book_id` | String | id of the book borrowed by the user specified in the `user_id` field.|
 
-**You must also add these fields to the books schema**:
+**You must also add these field to the books schema**:
 
 | Field     | Data Type | Note |
 |-----------|-----------|----------------------------------------------|
 | `available` | Boolean | indicate whether or not the book is available. default `true`.|
-| `borrowedBy` | String | id of the user borrowing the book. default "".|
 
-- The following methods in your API should ensure a two-way reference between `users` and `books`:
-    - PUT a book with `borrowedBy` and `available`
-    - PUT a user with `currentlyBorrowing`
-    - DELETE a book will remove the book from user's `favorites` and `currentlyBorrowing`
-    - DELETE a user should remove the user from the books' `borrowedBy`
+**Don't forget to add the following API**
+|Endpoint | Actions | Description |
+|---------|---------|-------------|
+| `borrowed_books`  | POST    | Respond with data of the newly created borrowed book. |
+| | PUT    | Modify borrowed books data (it would be useful to test with queries instead of plain API). |
+| | GET    | Respond with list of borrowed books. |
+| | DELETE    | delete borrowed books (it would be useful to test with queries instead of plain API). |
+
+- The following methods in your API should ensure a two-way reference between `users`, `books`, `user_favorites`, and `borrowed_books`:
+    - POST, PUT, DELETE `borrowed_books` and PUT `books`' `available`
+    - DELETE a book will DELETE a `user_favorites` containing the `book_id` and `borrowed_books`
+    - DELETE a user should DELETE `borrowed_books` and `user_favorites`
 - Create additional tests for each point of the bonus points that you decided to implement. **Again, this is a very important step to let us know how thorough you are.**
 - Come up with something fun!
 
