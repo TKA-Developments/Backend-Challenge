@@ -70,6 +70,7 @@ The following is the user schema:
 
 | Field     | Data Type | Note |
 |-----------|-----------|----------------------------------------------|
+| `user_id` | String | auto generated |
 | `name` | String | required field |
 | `email`| String | required field |
 | `dateCreated` | Date |  should be set automatically by the server |
@@ -78,6 +79,7 @@ The following is the books schema:
 
 | Field     | Data Type | Note |
 |-----------|-----------|---------------------------------------------|
+| `book_id` | String | auto generated |
 |`title` | String | required field|
 | `author` | String | required field |
 | `publicationDate` | Date | default current date |
@@ -86,14 +88,14 @@ The following is the books schema:
 **We assume that there's only one copy of each book in the collection.**
 
 ## Requirements
-1. Use PostgreSQL for your database, it should contain atleast 5 users and 25 books. **We have provided scripts for you to populate and clear the database, read below on how to use it**.
+1. Use PostgreSQL for your database, it should contain atleast 10 users and 10 books.
 2. Responses of your API should be a JSON object with 2 fields. the fist one is `message` and should contain a String readable to humans. The second field should be named `results` and should contain the actual JSON response object. Below is an example of a response:
 
 ```json
 {
     "message": "OK",
     "results": {
-        "_id": "w039e02",
+        "book_id": "w039e02",
         "title": "Sense and Sensibility",
         "author": "Jane Austen",
     }
