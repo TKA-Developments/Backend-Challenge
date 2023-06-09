@@ -30,12 +30,12 @@ Create a library book collection back-end (database + API connections) system fo
 |Endpoint | Actions | Description |
 |---------|---------|-------------|
 | `users`     | GET    | Respond with a list of users |
-|             | POST   | Respond with data of the newly created user |
+|             | POST   | Respond with data of the newly created user or return 400 error |
 | `user/:id`  | GET    | Respond with data of the specified user or return 404 error |
 |             | PUT    | Replace the user indicated by the id with supplied data or return 404 error |
 |             | DELETE | Delete the user indicated by the id or return 404 error |
-| `books`     | GET    | Respond with a list of books in the collection
-|             | POST   | Respond with data of the newly created book |
+| `books`     | GET    | Respond with a list of books in the collection |
+|             | POST   | Respond with data of the newly created book or return 400 error|
 | `books/:id` | GET    | Respond with data of the specified book or return 404 error |
 |           | PUT    | Replace entire book with supplied data or return 404 error |
 |           | DELETE | Delete the book indicated by the id or 404 error |
@@ -102,7 +102,7 @@ The following is the books schema:
 }
 ```
 3. When encountering errors, the responses from your API should consist of a JSON object containing `message` and `results` fields. The messages should be meaningful and easily understood by humans, allowing them to be displayed to users on the client side. Additionally, it is crucial for these error messages to be independent of the server-side technology being utilized. For instance, your API should avoid directly returning error messages from PostgreSQL to the client.
-4. Your API should respond with the appropriate HTTP status code. You should atleast have 200 (OK), 201 (created), 404 (not found), 500 (server error).
+4. Your API should respond with the appropriate HTTP status code. You should atleast have 200 (OK), 201 (created), 400 (invalid request), 404 (not found), 500 (server error).
 5. To incorporate query string functionality, it is recommended to utilize the methods offered by PostgreSQL **instead of** fetching all the results from PostgreSQL and then performing filtering, sorting, skipping, etc. within your Node/Express application code.
 6. Have server side validation for:
     - Users have to have atleast a name and email, other fields not specified can be set to reasonable values.
