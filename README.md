@@ -55,7 +55,6 @@ Below are some examples and their return values:
 | `http://localhost:8080/v0/users` | returns list of all users |
 | `http://localhost:8080/v0/books` | returns list of all books |
 | `http://localhost:8080/v0/users?cond={"_id":"102h38"}` | returns list of size 1 with the user with specified id |
-| `http://localhost:8080/v0/books?cond={"_id": {"$in": ["28s921", "02i8282"]}}` | returns a set of tasks with specified ids |
 | `http://localhost:8080/v0/books?cond={"available": true}`| returns a list of available books |
 | `http://localhost:8080/v0/users?sort={"name": 1}` | returns a list of users sorted by names in ascending order |
 | `http://localhost:8080/v0/users?select={"email": 0}`| returns a list of users without the email field |
