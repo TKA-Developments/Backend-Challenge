@@ -8,6 +8,7 @@ At TKA, we're less interested in your formal qualifications than in your ability
 - Feel free to learn from any resources. here are a few resources that can help you to get started:
     - [What is REST API?](https://youtu.be/-mN3VyJuCjM)
     - [Build a Rest Api with NodeJS (JavaScript), Express, and PostgreSQL](https://youtu.be/DihOP19LQdg)
+    - [How to Test Express APIs With Jest](https://www.makeuseof.com/express-apis-jest-test/)
 - We have a Udemy account that you can borrow (reach out to [admin@tka.co.id](mailto:admin@tka.co.id)). We have access to an online course that teaches you the fundamentals of web development, feel free to reach out if you are interested!
 - Get familiar with GitHub by going through the [GitHub tutorial](https://guides.github.com/activities/hello-world/).
 
